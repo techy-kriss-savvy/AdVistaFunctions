@@ -1,0 +1,9 @@
+{
+  "name": "advista-functions",
+  "version": "1.0.0",
+  "description": "Firebase database reset script",
+  "main": "reset-database.js",
+  "dependencies": {
+    "firebase-admin": "^11.10.0"
+  }
+}
