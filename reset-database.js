@@ -56,11 +56,16 @@ async function resetDailyAttempts() {
     });
 
     await Promise.all(updatePromises);
-    console.log("Daily reset completed!");
 
   } catch (error) {
     console.error("Error resetting attempts:", error);
   }
 }
 
-resetDailyAttempts();
+resetDailyAttempts().then(() => {
+    console.log("Daily reset completed!"); 
+    process.exit(0);
+}).catch((error) => {
+    console.error("Error:", error);
+    process.exit(1);
+});
