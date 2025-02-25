@@ -1,28 +1,27 @@
-name: Daily Reset
+name: Daily Firebase Reset
 
 on:
   schedule:
-    - cron: '0 18 * * *' # Runs every day at 12:00 AM IST (18:00 UTC)
-  workflow_dispatch: # Allows manual trigger
+    - cron: "0 18 * * *"  # Adjust based on your timezone (this runs at 12:00 AM IST)
+  workflow_dispatch:  # Allows manual triggering
 
 jobs:
   reset-database:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Set Up Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: 18
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
 
-    - name: Install Firebase CLI
-      run: npm install -g firebase-tools
+      - name: Install dependencies
+        run: npm install  # This ensures firebase-admin is installed
 
-    - name: Authenticate Firebase
-      run: echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" > firebase.json
-
-    - name: Run Reset Script
-      run: node reset-database.js
+      - name: Run reset script
+        run: node reset-database.js
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
