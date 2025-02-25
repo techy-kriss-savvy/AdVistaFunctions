@@ -2,8 +2,8 @@ name: Daily Firebase Reset
 
 on:
   schedule:
-    - cron: "0 18 * * *"  # Adjust for your timezone
-  workflow_dispatch:
+    - cron: "30 18 * * *"  # Runs at 12:00 AM IST (18:30 UTC)
+  workflow_dispatch:  # Allows manual triggering
 
 jobs:
   reset-database:
@@ -20,7 +20,6 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: ${{ github.workspace }}  # Ensure it's in the correct path
 
       - name: Run reset script
         run: node reset-database.js
